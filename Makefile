@@ -1,5 +1,5 @@
 run_backend:
-	go run backend/server.go
+	cd backend && go run server.go
 
 run_frontend:
 	cd frontend && yarn start
