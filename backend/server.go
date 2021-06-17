@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/bluedresscapital/bdc_v6/backend/db"
 	"log"
 	"net/http"
 	"os"
@@ -18,6 +19,8 @@ func main() {
 	if port == "" {
 		port = defaultPort
 	}
+
+	db.SeedUsers()
 
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 

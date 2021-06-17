@@ -69,7 +69,7 @@ type ComplexityRoot struct {
 
 type MutationResolver interface {
 	CreateLink(ctx context.Context, input model.NewLink) (*model.Link, error)
-	CreateUser(ctx context.Context, input model.NewUser) (string, error)
+	CreateUser(ctx context.Context, input model.NewUser) (*model.User, error)
 	Login(ctx context.Context, input model.Login) (string, error)
 	RefreshToken(ctx context.Context, input model.RefreshTokenInput) (string, error)
 }
@@ -290,7 +290,7 @@ input Login {
 
 type Mutation {
   createLink(input: NewLink!): Link!
-  createUser(input: NewUser!): String!
+  createUser(input: NewUser!): User!
   login(input: Login!): String!
   # we'll talk about this in authentication section
   refreshToken(input: RefreshTokenInput!): String!
@@ -634,9 +634,9 @@ func (ec *executionContext) _Mutation_createUser(ctx context.Context, field grap
 		}
 		return graphql.Null
 	}
-	res := resTmp.(string)
+	res := resTmp.(*model.User)
 	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
+	return ec.marshalNUser2ᚖgithubᚗcomᚋbluedresscapitalᚋbdc_v6ᚋbackendᚋgraphᚋmodelᚐUser(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Mutation_login(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -2621,6 +2621,10 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 		}
 	}
 	return res
+}
+
+func (ec *executionContext) marshalNUser2githubᚗcomᚋbluedresscapitalᚋbdc_v6ᚋbackendᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v model.User) graphql.Marshaler {
+	return ec._User(ctx, sel, &v)
 }
 
 func (ec *executionContext) marshalNUser2ᚖgithubᚗcomᚋbluedresscapitalᚋbdc_v6ᚋbackendᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v *model.User) graphql.Marshaler {

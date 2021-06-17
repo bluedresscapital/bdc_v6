@@ -6,6 +6,7 @@ package graph
 import (
 	"context"
 	"fmt"
+	"github.com/bluedresscapital/bdc_v6/backend/db"
 
 	"github.com/bluedresscapital/bdc_v6/backend/graph/generated"
 	"github.com/bluedresscapital/bdc_v6/backend/graph/model"
@@ -21,8 +22,8 @@ func (r *mutationResolver) CreateLink(ctx context.Context, input model.NewLink) 
 	return &link, nil
 }
 
-func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) (string, error) {
-	panic(fmt.Errorf("not implemented"))
+func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) (*model.User, error) {
+	return db.FetchUserByUsername(input.Username)
 }
 
 func (r *mutationResolver) Login(ctx context.Context, input model.Login) (string, error) {
